@@ -1,0 +1,1 @@
+import fs from 'node:fs';const required=['index.html','apps/li-yunxiao/index.html','apps/chen-lijun/index.html','functions/api/news.js','packages/shared/yueverse-bridge.js','data/actors/index.json'];let bad=0;for(const f of required){if(!fs.existsSync(f)){console.error('缺少',f);bad++}else console.log('OK',f)}process.exitCode=bad?1:0;

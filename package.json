@@ -1,0 +1,1 @@
+{"name":"yueverse-studio","version":"3.0.0","private":true,"description":"越界艺境：多演员越剧数字艺术馆统一工程","scripts":{"serve":"npx serve .","update:news":"node scripts/update-all-news.mjs","check":"node scripts/check-project.mjs"},"engines":{"node":">=20"}}

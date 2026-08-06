@@ -1,6 +1,6 @@
 const CACHE_PREFIX='yueverse-chenlijun-';
-const CACHE=CACHE_PREFIX+'v3.0.1';
-const CORE=['./','./index.html','./styles.css?v=3.0.1','./app.js?v=3.0.1','./manifest.webmanifest','./data/dynamics.json','./data/social.json','./data/daily.json','./assets/icon.svg','../../packages/shared/yueverse-shared.css?v=3.0.1','../../packages/shared/yueverse-bridge.js?v=3.0.1'];
+const CACHE=CACHE_PREFIX+'v3.1.0';
+const CORE=['./','./index.html','./styles.css?v=3.1.0','./app.js?v=3.1.0','./manifest.webmanifest','./data/dynamics.json','./data/social.json','./data/daily.json','./assets/icon.svg','./assets/hero-chen-lijun.webp','../../packages/shared/yueverse-shared.css?v=3.1.0','../../packages/shared/yueverse-bridge.js?v=3.1.0'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);
   await Promise.allSettled(CORE.map(url=>cache.add(url)));

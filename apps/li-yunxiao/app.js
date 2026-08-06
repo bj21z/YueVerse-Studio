@@ -277,7 +277,7 @@ function renderRemoteGallery(){
   const grid = document.querySelector('#galleryGrid');
   if(!grid) return;
   grid.innerHTML = remoteGallery.map((item,index)=>`<button class="gallery-item" type="button" data-gallery-index="${index}" aria-label="查看第${index+1}张图片：${escapeHTML(item.caption)}"><span class="gallery-image-wrap"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${item.url}" alt="${escapeHTML(item.caption)}"><i class="image-fallback">图片暂不可用</i></span><span class="gallery-caption"><b>${String(index+1).padStart(2,'0')}</b><em>${escapeHTML(item.caption)}</em></span></button>`).join('');
-  grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>img.closest('.gallery-image-wrap').classList.add('failed'),{once:true}));
+  grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{if(img.dataset.fallbackApplied)return;img.dataset.fallbackApplied='1';img.src='./assets/hero-li-yunxiao.webp';img.closest('.gallery-image-wrap')?.classList.add('using-fallback');},{once:true}));
   grid.querySelectorAll('[data-gallery-index]').forEach(btn=>btn.addEventListener('click',()=>openGallery(Number(btn.dataset.galleryIndex))));
 }
 function openGallery(index){
@@ -285,7 +285,7 @@ function openGallery(index){
   modalBody.innerHTML=`<section class="gallery-viewer"><div class="gallery-viewer-image"><img referrerpolicy="no-referrer" src="${item.url}" alt="${escapeHTML(item.caption)}"><span>图片加载失败，可稍后重试</span></div><div class="gallery-viewer-copy"><small>${index+1} / ${remoteGallery.length}</small><h2>${escapeHTML(item.caption)}</h2><p>${escapeHTML(item.source)}</p><div class="gallery-nav"><button class="secondary-action" id="galleryPrev">上一张</button><button class="action" id="galleryNext">${index===remoteGallery.length-1?'回到第一张':'下一张'}</button></div></div></section>`;
   openModal();
   const big=modalBody.querySelector('.gallery-viewer-image img');
-  big.addEventListener('error',()=>big.parentElement.classList.add('failed'),{once:true});
+  big.addEventListener('error',()=>{if(big.dataset.fallbackApplied)return;big.dataset.fallbackApplied='1';big.src='./assets/hero-li-yunxiao.webp';big.parentElement.classList.add('using-fallback');},{once:true});
   document.querySelector('#galleryPrev').addEventListener('click',()=>openGallery((index-1+remoteGallery.length)%remoteGallery.length));
   document.querySelector('#galleryNext').addEventListener('click',()=>openGallery((index+1)%remoteGallery.length));
 }
